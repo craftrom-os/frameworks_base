@@ -392,7 +392,7 @@ public class SenseProvider implements ServiceProvider {
     }
 
     public SenseProvider(Context context, FaceSensorPropertiesInternal sensorProps, LockoutResetDispatcher lockoutResetDispatcher) {
-        this(context, sensorProps, lockoutResetDispatcher, new BiometricScheduler(TAG, 0, null));
+        this(context, sensorProps, lockoutResetDispatcher, new BiometricScheduler(context, TAG, 0, null));
     }
 
     private synchronized ISenseService getDaemon() {
