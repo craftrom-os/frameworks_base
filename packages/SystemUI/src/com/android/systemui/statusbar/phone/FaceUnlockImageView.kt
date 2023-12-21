@@ -91,37 +91,6 @@ class FaceUnlockImageView @JvmOverloads constructor(
         updateFaceIconState()
     }
 
-    public override fun onAttachedToWindow() {
-        setInstance(this)
-        getConfigurationController()?.addCallback(configurationChangedListener)
-    }
-
-    public override fun onDetachedFromWindow() {
-        getConfigurationController()?.removeCallback(configurationChangedListener)
-    }
-
-    private val configurationChangedListener =
-        object : ConfigurationController.ConfigurationListener {
-            override fun onUiModeChanged() {
-                updateColor()
-            }
-            override fun onThemeChanged() {
-                updateColor()
-            }
-    }
-
-    fun updateColor() {
-        val isDark = (context.resources.configuration.uiMode
-                and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-        val darkColor = context.getColor(R.color.island_background_color_dark)
-        val lightColor = context.getColor(R.color.island_background_color_light)
-        imageTintList = ColorStateList.valueOf(if (this.id == R.id.bouncer_face_unlock_icon) {
-            if (isDark) lightColor else darkColor
-        } else {
-            Color.parseColor("#FFFFFF")
-        })
-    }
-
     fun setState(state: State) {
         if (currentState != state) {
             currentState = state
